@@ -88,15 +88,7 @@ export default function App() {
       {/* ── Main ────────────────────────────────────────────────────────── */}
       <main className="main-content">
 
-        {/* Mobile tab bar */}
-        <div className="tab-bar">
-          {TABS.map(t => (
-            <button key={t.id} className={`tab-btn ${tab === t.id ? "active" : ""}`}
-              onClick={() => setTab(t.id)}>
-              {t.label.split(" ")[0]}
-            </button>
-          ))}
-        </div>
+
 
         {/* ── PREDICT ─────────────────────────────────────────────────── */}
         {tab === "predict" && (

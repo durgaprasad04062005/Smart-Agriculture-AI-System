@@ -1,0 +1,15 @@
+[phases.setup]
+nixPkgs = ["python312"]
+
+[phases.install]
+cmds = [
+  "pip install flask flask-cors pandas requests openai python-dotenv gunicorn scikit-learn numpy"
+]
+
+[phases.build]
+cmds = [
+  "cd ../model && python generate_data.py && python train.py"
+]
+
+[start]
+cmd = "python app.py"
