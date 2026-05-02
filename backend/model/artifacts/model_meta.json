@@ -1,0 +1,49 @@
+{
+  "crops": [
+    "apple",
+    "banana",
+    "blackgram",
+    "chickpea",
+    "coconut",
+    "coffee",
+    "cotton",
+    "grapes",
+    "jute",
+    "kidneybeans",
+    "lentil",
+    "maize",
+    "mango",
+    "mothbeans",
+    "mungbean",
+    "muskmelon",
+    "orange",
+    "papaya",
+    "pigeonpeas",
+    "pomegranate",
+    "rice",
+    "sugarcane",
+    "watermelon",
+    "wheat"
+  ],
+  "feature_cols": [
+    "N",
+    "P",
+    "K",
+    "temperature",
+    "humidity",
+    "ph",
+    "rainfall"
+  ],
+  "feature_importance": {
+    "humidity": 0.20736998003168966,
+    "N": 0.16387976018929173,
+    "rainfall": 0.1637114316939621,
+    "P": 0.15766611763408545,
+    "K": 0.12574448039967662,
+    "temperature": 0.09497637916882508,
+    "ph": 0.08665185088246935
+  },
+  "accuracy": 0.8729,
+  "mae": 1.14,
+  "r2": -0.004
+}

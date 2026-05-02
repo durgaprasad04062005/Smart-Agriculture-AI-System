@@ -27,10 +27,24 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # ── Add model directory to Python path ────────────────────────────────────────
-MODEL_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "model")
-SVC_DIR   = os.path.join(os.path.dirname(os.path.abspath(__file__)), "services")
+# Support both local (../model) and Railway (/app/model) layouts
+_BASE = os.path.dirname(os.path.abspath(__file__))
+_MODEL_SIBLING = os.path.join(_BASE, "..", "model")   # local: backend/../model
+_MODEL_INSIDE  = os.path.join(_BASE, "model")          # Railway: backend/model
+
+if os.path.exists(_MODEL_SIBLING):
+    MODEL_DIR = os.path.abspath(_MODEL_SIBLING)
+elif os.path.exists(_MODEL_INSIDE):
+    MODEL_DIR = os.path.abspath(_MODEL_INSIDE)
+else:
+    # fallback: create model dir inside backend
+    MODEL_DIR = os.path.join(_BASE, "model")
+    os.makedirs(MODEL_DIR, exist_ok=True)
+
+SVC_DIR = os.path.join(_BASE, "services")
 sys.path.insert(0, MODEL_DIR)
 sys.path.insert(0, SVC_DIR)
+logger_setup = logging.getLogger(__name__)
 
 app = Flask(__name__)
 CORS(app)
@@ -63,8 +77,9 @@ def _train_model():
     env = os.environ.copy()
     env["PYTHONIOENCODING"] = "utf-8"
     for script in ["generate_data.py", "train.py"]:
+        script_path = os.path.join(MODEL_DIR, script)
         result = subprocess.run(
-            [sys.executable, os.path.join(MODEL_DIR, script)],
+            [sys.executable, script_path],
             capture_output=True, text=True, encoding="utf-8", env=env,
         )
         logger.info(result.stdout)
