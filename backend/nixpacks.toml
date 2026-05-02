@@ -1,0 +1,11 @@
+[phases.setup]
+nixPkgs = ["python311"]
+
+[phases.install]
+cmds = [
+  "pip install --upgrade pip",
+  "pip install flask==3.1.1 flask-cors==5.0.1 scikit-learn==1.5.2 numpy==1.26.4 pandas==2.2.2 requests==2.32.3 openai==1.35.0 gunicorn==22.0.0 python-dotenv==1.0.1"
+]
+
+[start]
+cmd = "gunicorn app:app --bind 0.0.0.0:$PORT --workers 1 --timeout 120"

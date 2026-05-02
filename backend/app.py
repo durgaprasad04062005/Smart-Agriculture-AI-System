@@ -102,6 +102,15 @@ def validate_fields(data: dict) -> str | None:
 # ROUTES
 # ══════════════════════════════════════════════════════════════════════════════
 
+@app.route("/", methods=["GET"])
+def index():
+    return jsonify({
+        "name":      "Smart Agriculture AI API",
+        "version":   "2.0",
+        "status":    "running",
+        "endpoints": ["/health", "/predict", "/profit", "/weather", "/chat", "/train", "/data", "/crops", "/meta", "/prices"]
+    })
+
 @app.route("/health", methods=["GET"])
 def health():
     return jsonify({"status": "ok", "timestamp": datetime.utcnow().isoformat()})
