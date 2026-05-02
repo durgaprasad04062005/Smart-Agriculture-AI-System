@@ -1,5 +1,5 @@
 """
-app.py  —  Smart Agriculture AI System (Advanced)
+app.py  —  Smart Agriculture AI System (Advanced) v2.1
 --------------------------------------------------
 REST API endpoints:
   GET  /health
