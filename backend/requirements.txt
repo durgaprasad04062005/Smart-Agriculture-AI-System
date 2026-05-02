@@ -1,20 +1,9 @@
-# Web framework
-flask>=3.1.0
-flask-cors>=5.0.0
-
-# ML stack (Python 3.14 needs --pre flag: pip install --pre scikit-learn)
-scikit-learn>=1.6.0
-numpy>=2.0.0
-pandas>=2.2.0
-
-# HTTP requests (for weather API)
-requests>=2.32.0
-
-# OpenAI (optional — for AI chat)
-openai>=1.35.0
-
-# Production server
-gunicorn>=22.0.0
-
-# Utilities
-python-dotenv>=1.0.0
+flask==3.1.1
+flask-cors==5.0.1
+scikit-learn==1.5.2
+numpy==1.26.4
+pandas==2.2.2
+requests==2.32.3
+openai==1.35.0
+gunicorn==22.0.0
+python-dotenv==1.0.1
