@@ -3,12 +3,25 @@ backend/venv/
 __pycache__/
 *.pyc
 *.pyo
+*.pyd
 .env
+*.egg-info/
+dist/
+build/
 
 # Node
 frontend/node_modules/
 frontend/dist/
+frontend/.env.local
+
+# Model artifacts (large binary — regenerate with train.py)
+# Uncomment to exclude from git:
+# model/artifacts/crop_model.pkl
 
 # OS
 .DS_Store
 Thumbs.db
+
+# IDE
+.vscode/settings.json
+.idea/

@@ -83,7 +83,7 @@ FIELD_RANGES = {
     "rainfall":    (0, 500),
 }
 
-def validate_fields(data: dict):
+def validate_fields(data: dict) -> str | None:
     """Return error string or None if valid."""
     missing = [f for f in FIELD_RANGES if f not in data]
     if missing:
@@ -107,16 +107,6 @@ def health():
     return jsonify({"status": "ok", "timestamp": datetime.utcnow().isoformat()})
 
 
-@app.route("/", methods=["GET"])
-def index():
-    return jsonify({
-        "name":    "Smart Agriculture AI API",
-        "version": "2.0",
-        "status":  "running",
-        "endpoints": ["/health", "/predict", "/profit", "/weather", "/chat", "/train", "/data", "/crops", "/meta", "/prices"]
-    })
-
-
 # ── /predict ──────────────────────────────────────────────────────────────────
 @app.route("/predict", methods=["POST"])
 def predict():
@@ -131,8 +121,8 @@ def predict():
         if err:
             return jsonify({"error": err}), 400
 
-        from predict import predict as ml_predict
-        result = ml_predict(data)
+        from predict import predict as run_predict
+        result = run_predict(data)
 
         # Auto-calculate profit and attach
         from profit_service import calculate_profit
@@ -321,7 +311,6 @@ def prices():
 
 # ══════════════════════════════════════════════════════════════════════════════
 if __name__ == "__main__":
-    port  = int(os.environ.get("PORT", 8080))
-    debug = os.environ.get("FLASK_ENV", "development") == "development"
-    logger.info(f"Starting Smart Agriculture AI (Advanced) on port {port} ...")
-    app.run(host="0.0.0.0", port=port, debug=debug)
+    port = int(os.environ.get("PORT", 8080))
+    logger.info(f"Starting Smart Agriculture AI on port {port} ...")
+    app.run(host="0.0.0.0", port=port, debug=False)
